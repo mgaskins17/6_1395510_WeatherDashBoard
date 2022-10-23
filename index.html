@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap link to allow for us -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- CSS stylesheet link -->
+  <link rel="stylesheet" href="./Assets/style.css" />
+  <title></title>
+</head>
+
+<body>
+  <h1 class="jumbotron m-0">Weather Dashboard</h1>
+
+<main class="d-flex min-vh-100">
+
+  <div id="containerL" class="container-fluid col-xl-3 border border-primary">
+
+    <div id="search" class="border-bottom">
+      <h2 class="d-block p-2">Search for a city:</h2>
+      <input type="text" id="CitySearch" class="d-block my-2 form-control">
+      <button id="SearchBtn" class="btn btn-primary d-block p-2 form-control">Search!</button>
+    </div>
+    
+    <div class="past">
+
+    </div>
+
+  </div>
+
+  <div id="containerR" class="container= col-xl-9 border border-primary">
+
+    <div id="today" class="col h-25 border border-danger">
+      <h2 id="cityName"></h2>
+      <div id="cityTemp"></div>
+      <div id="cityWindspd"></div>
+      <div id="cityHum"></div>
+    </div>
+
+    <div id="5day" class="d-flex h-75 border border-danger">
+
+
+    </div>
+
+  </div>
+</main>
+
+    <!-- Link to jquery to allow for us -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Link to moment api -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Javascript Link to HTMl -->
+    <script src="./Assets/script.js"></script>
+</body>
+
+</html>
