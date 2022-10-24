@@ -13,25 +13,26 @@
 <body>
   <h1 class="jumbotron m-0">Weather Dashboard</h1>
 
-<main class="d-flex min-vh-100">
+<main class="d-flex min-vh-100 bg-secondary">
 
-  <div id="containerL" class="container-fluid col-xl-3 border border-primary">
+  <div id="containerL" class="container-fluid col-xl-3 ">
 
-    <div id="search" class="border border-danger">
+    <div id="search" class="">
       <h2 class="d-block p-2">Search for a city:</h2>
       <input type="text" id="CitySearch" class="d-block my-2 form-control">
-      <button id="SearchBtn" class="btn btn-primary d-block p-2 form-control">Search!</button>
+      <button id="SearchBtn" class="btn btn-primary d-block p-2 my-2 form-control">Search</button>
+      <button id="ClearBtn" class="btn btn-primary d-block p-2 form-control">Clear History</button>
     </div>
     
-    <div id="past" class="border border-danger"></div>
+    <div id="past" class=""></div>
 
   </div>
 
-  <div id="containerR" class="container= col-xl-9 border border-primary">
+  <div id="containerR" class="container= col-xl-9 ">
 
     <div id="today" class="col h-25 text-white bg-info border border-dark">
       <div class="row">
-        <h2 id="cityName"></h2>
+        <h2 id="cityName" class="p-1"></h2>
         <img id='todaypic' alt="">
       </div>
       <div id="cityTemp"></div>
@@ -40,11 +41,11 @@
     </div>
 
     <div id="5day" class="d-flex h-75 justify-content-between p-3">
-      <div id="Day0" class="card border border-primary h-50" style="width:18%"></div>
-      <div id="Day1" class="card border border-primary h-50" style="width:18%"></div>
-      <div id="Day2" class="card border border-primary h-50" style="width:18%"></div>
-      <div id="Day3" class="card border border-primary h-50" style="width:18%"></div>
-      <div id="Day4" class="card border border-primary h-50" style="width:18%"></div>
+      <div id="Day0" class="card border border-dark bg-success p-2 h-50" style="width:18%"></div>
+      <div id="Day1" class="card border border-dark bg-success p-2 h-50" style="width:18%"></div>
+      <div id="Day2" class="card border border-dark bg-success p-2 h-50" style="width:18%"></div>
+      <div id="Day3" class="card border border-dark bg-success p-2 h-50" style="width:18%"></div>
+      <div id="Day4" class="card border border-dark bg-success p-2 h-50" style="width:18%"></div>
     </div>
 
   </div>

@@ -13,10 +13,16 @@ var Clon
 var Cwindspd
 var Ctemp
 var Chum
-var SearchHistory =[];
+
+if (localStorage.getItem('Searches') !== null) {
+    var SearchHistory = JSON.parse(localStorage.getItem('Searches'));
+} else {
+    var SearchHistory =[]
+}
 
 var CitySearch = {};
 var FiveDay = {};
+
 // Building function where I get the results for the current day and 5-day forecast - Do i save to local storage here?
 // What do I save to local storage? 
 function getSearchResults(cityname, APIkey) {
@@ -42,10 +48,7 @@ function getSearchResults(cityname, APIkey) {
 
         localStorage.setItem('CitySearch', JSON.stringify(CitySearch));
         console.log(CitySearch);
-        // $('#cityName').text(`${cityname} (${currentDate})`);
-        // $('#cityTemp').text(`Temp: ${CitySearch.Ctemp}`);
-        // $('#cityWindspd').text(`Wind Speed: ${CitySearch.Cwindspd}`);
-        // $('#cityHum').text(`Humidity: ${CitySearch.Chum}`);
+
 
         // Getting 5-day forecast using Lat/Lon saved From City Search
         var LatLonURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${CitySearch.Clat}&lon=${CitySearch.Clon}&appid=${APIkey}&units=imperial`;
@@ -84,6 +87,9 @@ function RenderCurrent() {
 function RenderFiveDay() {
     var FiveObj = JSON.parse(localStorage.getItem('FiveDay')); // tried using FiveDay but it created issues - don't reuse global variables for local purposes
     for (let i = 0; i < 5; i++) {
+        ResetCards(i);
+    }
+    for (let i = 0; i < 5; i++) {
         $('<div>').addClass('added').text(`${currentMonth}/${parseInt(currentDay)+i+1}/${currentYear}`).attr('style','font-size: 1rem; font-weight: bold').appendTo(`#Day${i}`)
         $('<div>').addClass('added').text(`Temp: ${FiveObj[i].FiveTemp} °F`).attr('style','font-size: .9rem').appendTo(`#Day${i}`)
         Temppic = $('<img>').addClass('added').attr('src',`https://openweathermap.org/img/wn/${FiveObj[i].FiveIcon}.png`);
@@ -99,10 +105,12 @@ function ResetCards(i) {
     }
 }
 
+
 // Checking to see if there is something in local storage then outputting if there is
 if (localStorage.getItem('CitySearch') !== null) {
     RenderCurrent();
     RenderFiveDay();
+    SearchRender();
 }
 
 // Search button action of putting out new results
@@ -112,33 +120,54 @@ $('#SearchBtn').click(function() {
        SearchHistory.push(cityname);
        localStorage.setItem('Searches',JSON.stringify(SearchHistory));
     }
-    for (let i=0; i < 5; i++) {
-        ResetCards(i);
-    }
     getSearchResults(cityname, APIkey);
     RenderCurrent()
     RenderFiveDay()
     SearchRender()
 });
 
-function resetSearch() {
-    while ($('#past').children) { // Before appending the other answer choices, this will remove all children until none are left
-        $('#past').empty()
-    }
-}
+$('#ClearBtn').click(function() {
+    SearchHistory = [];
+    localStorage.setItem('Searches',JSON.stringify(SearchHistory));
+    $('#past').empty()
+})
+
+// Reacting to when a past history button is pressed
+$('.HistSearch-btn').click(function() {
+    cityname = $(this).text();
+    console.log(cityname);
+    getSearchResults(cityname, APIkey);
+    RenderCurrent()
+    RenderFiveDay()
+    SearchRender()
+})
+
+// function resetSearch() {
+//     while ($('#past').children) { // Before appending the other answer choices, this will remove all children until none are left
+//         $('#past').empty()
+//     }
+// }
 
 // Build Search History 
 // Treat each one as a button that will output that cities weather forecast
 function SearchRender() {
-    resetSearch()
+    // resetSearch()
+    $('#past').empty()
     if (localStorage.getItem('Searches') !== null) {
     var SearchHis = JSON.parse(localStorage.getItem('Searches'));
     }
 
     for (let i = 0; i<SearchHis.length; i++) {
-        $('<div>').text(SearchHis[i]).appendTo('#past');
+        $('<button>').text(SearchHis[i]).addClass('btn HistSearch-btn btn-danger d-block p-2 my-2 form-control').appendTo('#past');
     }
 }
+
+
+
+
+
+
+
 
 
 
