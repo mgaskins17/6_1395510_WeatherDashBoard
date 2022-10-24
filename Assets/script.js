@@ -125,11 +125,12 @@ if (localStorage.getItem('CitySearch') !== null) {
 // Search button action of putting out new results
 $('#SearchBtn').click(function() {
     cityname = $('#CitySearch').val();
-    if ($('#CitySearch').val() !== null) {
-       SearchHistory.push(cityname);
-       localStorage.setItem('Searches',JSON.stringify(SearchHistory));
+    if ($('#CitySearch').val() !== '') {
+        if (SearchHistory.includes(cityname.toUpperCase()) == false)
+            SearchHistory.push(cityname.toUpperCase());
+            localStorage.setItem('Searches',JSON.stringify(SearchHistory));
     }
-    getSearchResults(cityname, APIkey);
+    getSearchResults(cityname.toUpperCase(), APIkey);
     SearchRender()
 });
 
