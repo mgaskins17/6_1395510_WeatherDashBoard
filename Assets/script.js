@@ -101,6 +101,26 @@ function RenderFiveDay() {
     }
 }
 
+// Build Search History 
+// Treat each one as a button that will output that cities weather forecast
+function SearchRender() {
+    // resetSearch()
+    $('#past').empty()
+    if (localStorage.getItem('Searches') !== null) {
+    var SearchHis = JSON.parse(localStorage.getItem('Searches'));
+    }
+    
+    for (let i = 0; i<SearchHis.length; i++) {
+        $('<button>').text(SearchHis[i]).addClass('Hist-btn btn btn-danger d-block p-2 my-2 form-control').appendTo('#past');
+    }
+}
+
+// Checking to see if there is something in local storage then outputting if there is
+if (localStorage.getItem('CitySearch') !== null) {
+    Recover = JSON.parse(localStorage.getItem('CitySearch'))
+    getSearchResults(Recover.CName,APIkey)
+    SearchRender()
+}
 
 // Search button action of putting out new results
 $('#SearchBtn').click(function() {
@@ -121,29 +141,13 @@ $('#ClearBtn').click(function() {
 })
 
 // Reacting to when a past history button is pressed
-$(".Hist-btn").on('click', function() {
+$("#past").on('click','button',function() { // for some reason I put an event listener on the container for the buttons instead the buttons themselves
     console.log('please work now');
+    getSearchResults($(this).text(), APIkey)
 })
+  
 
-// Checking to see if there is something in local storage then outputting if there is
-if (localStorage.getItem('CitySearch') !== null) {
-    Recover = JSON.parse(localStorage.getItem('CitySearch'))
-    getSearchResults(Recover.CName,APIkey)
-    SearchRender()
-}
 
-// Build Search History 
-// Treat each one as a button that will output that cities weather forecast
-function SearchRender() {
-    // resetSearch()
-    $('#past').empty()
-    if (localStorage.getItem('Searches') !== null) {
-    var SearchHis = JSON.parse(localStorage.getItem('Searches'));
-    }
-    for (let i = 0; i<SearchHis.length; i++) {
-        $('<div>').text(SearchHis[i]).addClass('Hist-btn btn btn-danger d-block p-2 my-2 form-control').appendTo('#past');
-    }
-}
 
 
 
