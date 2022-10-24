@@ -7,8 +7,6 @@
 
   <!-- Bootstrap link to allow for us -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-  <!-- CSS stylesheet link -->
-  <link rel="stylesheet" href="./Assets/style.css" />
   <title></title>
 </head>
 
@@ -19,30 +17,34 @@
 
   <div id="containerL" class="container-fluid col-xl-3 border border-primary">
 
-    <div id="search" class="border-bottom">
+    <div id="search" class="border border-danger">
       <h2 class="d-block p-2">Search for a city:</h2>
       <input type="text" id="CitySearch" class="d-block my-2 form-control">
       <button id="SearchBtn" class="btn btn-primary d-block p-2 form-control">Search!</button>
     </div>
     
-    <div class="past">
-
-    </div>
+    <div id="past" class="border border-danger"></div>
 
   </div>
 
   <div id="containerR" class="container= col-xl-9 border border-primary">
 
-    <div id="today" class="col h-25 border border-danger">
-      <h2 id="cityName"></h2>
+    <div id="today" class="col h-25 text-white bg-info border border-dark">
+      <div class="row">
+        <h2 id="cityName"></h2>
+        <img id='todaypic' alt="">
+      </div>
       <div id="cityTemp"></div>
       <div id="cityWindspd"></div>
       <div id="cityHum"></div>
     </div>
 
-    <div id="5day" class="d-flex h-75 border border-danger">
-
-
+    <div id="5day" class="d-flex h-75 justify-content-between p-3">
+      <div id="Day0" class="card border border-primary h-50" style="width:18%"></div>
+      <div id="Day1" class="card border border-primary h-50" style="width:18%"></div>
+      <div id="Day2" class="card border border-primary h-50" style="width:18%"></div>
+      <div id="Day3" class="card border border-primary h-50" style="width:18%"></div>
+      <div id="Day4" class="card border border-primary h-50" style="width:18%"></div>
     </div>
 
   </div>
