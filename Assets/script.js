@@ -56,7 +56,7 @@ async function getSearchResults(cityname, APIkey) {
         .then((response) => response.json())
         .then(function(data) {
             console.log(data)
-            for (let i = 0; i < 5; i++) {
+            for (let i = 7; i < 40; i+=8) {
                 FiveDay[i] = {
                     CName: cityname,
                     FiveTemp: data.list[i].main.temp,
@@ -89,16 +89,19 @@ function RenderCurrent() {
 
 function RenderFiveDay() {
     var FiveObj = JSON.parse(localStorage.getItem('FiveDay')); // tried using FiveDay but it created issues - don't reuse global variables for local purposes
-    for (let i = 0; i < 5; i++) {
+    count = 0;
+    for (let i = 7; i < 40; i+=8) {
         console.log('render five works')
-        $(`#Day${i}`).empty()
-        $('<div>').addClass('added').text(`${currentMonth}/${parseInt(currentDay)+i+1}/${currentYear}`).attr('style','font-size: 1rem; font-weight: bold').appendTo(`#Day${i}`)
-        $('<div>').addClass('added').text(`Temp: ${FiveObj[i].FiveTemp} °F`).attr('style','font-size: .9rem').appendTo(`#Day${i}`)
+        $(`#Day${count}`).empty()
+        $('<div>').addClass('added').text(`${currentMonth}/${parseInt(currentDay)+i+1}/${currentYear}`).attr('style','font-size: 1rem; font-weight: bold').appendTo(`#Day${count}`)
+        $('<div>').addClass('added').text(`Temp: ${FiveObj[i].FiveTemp} °F`).attr('style','font-size: .9rem').appendTo(`#Day${count}`)
         Temppic = $('<img>').addClass('added').attr('src',`https://openweathermap.org/img/wn/${FiveObj[i].FiveIcon}.png`);
-        Temppic.attr('style','height:25%; width:40%; margin:0 auto').appendTo(`#Day${i}`)
-        $('<div>').addClass('added').text(`Wind Speed: ${FiveObj[i].FiveWind} mph`).attr('style','font-size: .9rem').appendTo(`#Day${i}`)
-        $('<div>').addClass('added').text(`Humidity: ${FiveObj[i].FiveHum}`).attr('style','font-size: .9rem').appendTo(`#Day${i}`)
+        Temppic.attr('style','height:25%; width:40%; margin:0 auto').appendTo(`#Day${count}`)
+        $('<div>').addClass('added').text(`Wind Speed: ${FiveObj[i].FiveWind} mph`).attr('style','font-size: .9rem').appendTo(`#Day${count}`)
+        $('<div>').addClass('added').text(`Humidity: ${FiveObj[i].FiveHum}`).attr('style','font-size: .9rem').appendTo(`#Day${count}`)
+        count++
     }
+console.log(count)
 }
 
 // Build Search History 
